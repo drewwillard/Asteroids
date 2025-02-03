@@ -29,7 +29,7 @@ def main():
     player_1 = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
     main_field = AsteroidField()
     
-    # Main game loop
+    # GAME LOOP
     while True:
         game_clock.tick(FPS)
         dt = game_clock.get_time() / 1000
@@ -39,6 +39,11 @@ def main():
                 return
         for item in updatable:
             item.update(dt)
+        for asteroid in all_asteroids:
+            if player_1.collision_check(asteroid) == True:
+                print("Game over!")
+                SystemExit()
+                return
         pygame.Surface.fill(screen, (0, 0, 0)) #black screen
         for item in drawable:
             item.draw(screen)
